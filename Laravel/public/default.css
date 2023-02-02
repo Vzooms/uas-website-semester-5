@@ -1,0 +1,31 @@
+body{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: content-box;
+    min-height: 100vh;
+    position: relative;
+}
+
+*{
+    margin: 0px;
+    padding: 0px;
+}
+
+.allCenter{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+a{
+    text-decoration: none !important;
+}
+
+.keep{
+    white-space: nowrap;
+}
+
+#title{
+    /* font-family: 'Courier New', Courier, monospace; */
+    font-family:cursive;
+}
