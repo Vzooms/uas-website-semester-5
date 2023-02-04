@@ -1,12 +1,16 @@
 <tr>
-    <td class="text-center m-0">
-        1
-    </td>
     <td class="w-50">
-        Nelsen - Admin
+        {{$account->first_name . ' ' . $account->last_name }} - {{$account->role->role_name}}
     </td>
-    <td>
-        <button class="btn btn-warning">Update Role</button>
-        <button class="btn btn-danger">Delete</button>
+    <td class="d-flex gap-2">
+        <a href={{'/account_maintenance/detail/'.$account->id}}>
+            <button class="btn btn-warning">Update Role</button>
+        </a>
+        <form action="/deleteAccount" method="post">
+            @csrf
+            @method('delete')
+            <input type="hidden" name="id" value={{$account->id}}>
+            <button class="btn btn-danger">Delete</button>
+        </form>
     </td>
 </tr>

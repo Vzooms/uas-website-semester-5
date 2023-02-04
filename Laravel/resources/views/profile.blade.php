@@ -1,33 +1,56 @@
 @extends('templates.header')
 @section('main')
 
+    @include('templates.navbar')
+
     <div class="text-center container py-5" style="margin-bottom: 5vh">
-        <img class="mb-3" max-height='100px' max-width="100px" src="/test.png" alt="">
-        <form class="allCenter flex-column gap-3" action="">
+        <form enctype="multipart/form-data" class="d-flex align-items-center flex-column gap-3" action="/editProfile" method="post">
             @csrf
-            <div class="d-flex w-100">
-                <input class="form-control p-2" placeholder="First Name" type="email">
-                <input class="form-control p-2" placeholder="Last Name" type="password">
+            @method('patch')
+            <img class="mb-3 rounded-circle" width="150px" height="150px" src="{{'/storage/images/'.$account->display_picture_link}}" alt="">
+
+            @if($errors->has('first_name'))
+                <div class="text-danger">{{ $errors->first('first_name') }}</div>
+            @endif
+            <input required class="form-control p-2" placeholder="First Name" type="text" name="first_name" value="{{ $account->first_name }}">
+
+            @if($errors->has('last_name'))
+                <div class="text-danger">{{ $errors->first('last_name') }}</div>
+            @endif
+            <input required class="form-control p-2" placeholder="Last Name" type="text" name="last_name" value="{{ $account->last_name }}">
+
+            @if($errors->has('email'))
+                <div class="text-danger">{{ $errors->first('email') }}</div>
+            @endif
+            <input required class="form-control p-2" placeholder="Email Address" type="email" name="email" value="{{ $account->email }}">
+
+            <select class="form-select" name="roles">
+                <option class="text-muted" selected disabled>Choose Role</option>
+                @foreach ($roles as $role)
+                    <option value={{ $role->id }} {{ $account->role->id == $role->id ? 'selected' : '' }}>{{ $role->role_name }}</option>
+                @endforeach
+            </select>
+
+            <div class="d-flex align-items-center w-100 gap-3">
+                @foreach ($genders as $gender)
+                    <label for={{ $gender->gender_desc }}>{{ $gender->gender_desc }}</label>
+                    <input required class="form-check-input required" type="radio" name="gender" value={{ $gender->id }} id={{ $gender->gender_desc }}
+                    {{ $account->gender->id == $gender->id ? 'checked' : '' }}>
+                @endforeach
             </div>
 
-            <input class="form-control p-2" placeholder="Email Address" type="email">
-            <input class="form-control p-2" placeholder="Role" type="email">
-
-            <label for="gender" class="w-100 d-flex justify-content-start gap-3">
-                <label for="male">Male</label>
-                <input class="form-check-input" type="radio" name="gender" value="male" id="male">
-
-                <label for="female">female</label>
-                <input class="form-check-input" type="radio" name="gender" value="female" id="female">
-            </label>
-
+            @if($errors->has('display_picture'))
+                <div class="text-danger">{{ $errors->first('display_picture') }}</div>
+            @endif
             <div class="d-flex align-items-center w-100">
-                <label class="keep me-3" for="">Display Picture</label>
-                <input class="form-control" type="file" placeholder="Display Picture" name="" id="">
+                <label for="display_picture" class="keep me-3">Display Picture</label>
+                <input required class="form-control" type="file" placeholder="Display Picture" id="display_picture" accept="image/*" name="display_picture">
             </div>
 
-            <input class="form-control p-2" placeholder="Password" type="password">
-            <input class="form-control p-2" placeholder="Confirm Password" type="password">
+            @if($errors->has('password'))
+                <div class="text-danger">{{ $errors->first('password') }}</div>
+            @endif
+            <input required class="form-control p-2" placeholder="Password" type="password" name="password">
 
             <button class="btn btn-lg btn-primary" type="submit">Save</button>
         </form>
