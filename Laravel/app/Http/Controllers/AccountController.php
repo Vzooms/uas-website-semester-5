@@ -31,8 +31,6 @@ class AccountController extends Controller
         $display_picture_link = $img->getClientOriginalName();
         Storage::putFileAs('public/images', $img, $display_picture_link);
 
-        $temp_token = $req->_token;
-
         $date = Carbon::now();
         $date->setTimezone('Asia/Jakarta');
 
@@ -46,26 +44,7 @@ class AccountController extends Controller
             "confirm-password" => 'same:password',
         ]);
 
-        if(Account::where('email', $req['email'])->first()->deleted_at != NULL){
-            Account::where('email', $req['email'])->update([
-                "remember_token" => $temp_token,
-                "first_name" => $req['first_name'],
-                "last_name" => $req['last_name'],
-                "email" => $req['email'],
-                "role_id" => $req['roles'],
-                "gender_id" => $req['gender'],
-                "password" => hash::make($req['password']),
-                "display_picture_link" => $display_picture_link,
-                'created_at' => $date,
-                'updated_at' => null,
-                'deleted_at' => NULL,
-            ]);
-
-            return redirect('/login');
-        }
-
-        Account::insert([
-            "remember_token" => $temp_token,
+        Account::create([
             "first_name" => $req['first_name'],
             "last_name" => $req['last_name'],
             "email" => $req['email'],
@@ -73,7 +52,6 @@ class AccountController extends Controller
             "gender_id" => $req['gender'],
             "password" => hash::make($req['password']),
             "display_picture_link" => $display_picture_link,
-            'created_at' => $date,
         ]);
 
         return redirect('/login');
@@ -89,18 +67,15 @@ class AccountController extends Controller
             'password' => ['required'],
         ]);
 
-        if(Account::where('email', $req->email)->first()->deleted_at != NULL){
-            return back()->withErrors('wrong email or password');
-        }
-
         if (Auth::attempt($credentials)) {
             $req->session()->regenerate();
 
             return redirect('/home');
         }
 
-        return back();
+        return redirect()->back()->withErrors('wrong email or password');
     }
+
     //  ------------------------------------------------------------------------------------------ PROFILE
     public function toProfile(){
         return view('profile',[
@@ -116,9 +91,6 @@ class AccountController extends Controller
         Storage::putFileAs('public/images', $img, $display_picture_link);
 
         $temp_token = $req->_token;
-
-        $date = Carbon::now();
-        $date->setTimezone('Asia/Jakarta');
 
         $req = $req->validate([
             "first_name" => 'required|max:25|regex:/[a-zA-Z\s]+$/',
@@ -139,7 +111,6 @@ class AccountController extends Controller
             "gender_id" => $req['gender'],
             "password" => hash::make($req['password']),
             "display_picture_link" => $display_picture_link,
-            'updated_at' => $date,
         ]);
 
         return view('/success',[
@@ -153,7 +124,7 @@ class AccountController extends Controller
     public function toAccount_maintenance(){
         return view('account_maintenance.account_maintenance',[
             "page" => 'Account Maintenance',
-            "accounts" => Account::where('deleted_at',NULL)->get(),
+            "accounts" => Account::get(),
         ]);
     }
     public function toAccountDetail($id){
@@ -164,24 +135,15 @@ class AccountController extends Controller
         ]);
     }
     public function editAccountMaintenance(Request $req){
-        $date = Carbon::now();
-        $date->setTimezone('Asia/Jakarta');
 
         Account::where('id', $req->id)->update([
             'role_id' => $req->role,
-            'updated_at' => $date,
         ]);
 
         return redirect('/account_maintenance');
     }
     public function deleteAccount(Request $req){
-        $date = Carbon::now();
-        $date->setTimezone('Asia/Jakarta');
-
-
-        Account::where('id', $req->id)->update([
-            'deleted_at' => $date,
-        ]);
+        Account::where('id', $req->id)->delete();
 
         if($req->id == Auth::user()->id){
             $this->logout($req);

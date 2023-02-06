@@ -22,9 +22,9 @@ class CreateAccountsTable extends Migration
             $table->string('email');
             $table->string('display_picture_link');
             $table->string('password');
-            $table->string('remember_token')->nullable();
+            $table->rememberToken();
             $table->timestamps();
-            $table->softDeletes($column = 'deleted_at', $precision = 0);
+            $table->softDeletes();
         });
     }
 
