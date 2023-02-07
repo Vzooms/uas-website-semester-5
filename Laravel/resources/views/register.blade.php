@@ -4,22 +4,22 @@
     <div class="container py-3 w-50 d-flex justify-content-center">
         <form enctype="multipart/form-data" class="d-flex align-items-center flex-column gap-3" action="/register" method="post">
             @csrf
-            <h3 class="w-100">Register</h3>
+            <h3 class="w-100">{{ trans('messages.Register') }}</h3>
 
             @if($errors->has('first_name'))
                 <div class="text-danger">{{ $errors->first('messages.first_name') }}</div>
             @endif
-            <input required class="form-control p-2" placeholder="First Name" type="text" name="first_name" value="{{ old('first_name') }}">
+            <input required class="form-control p-2" placeholder="{{trans('messages.FirstName')}}" type="text" name="first_name" value="{{ old('first_name') }}">
 
             @if($errors->has('last_name'))
                 <div class="text-danger">{{ $errors->first('last_name') }}</div>
             @endif
-            <input required class="form-control p-2" placeholder={{ trans('messages.Last Name') }} type="text" name="last_name" value="{{ old('last_name') }}">
+            <input required class="form-control p-2" placeholder="{{ trans('messages.LastName') }}" type="text" name="last_name" value="{{ old('last_name') }}">
 
             @if($errors->has('email'))
                 <div class="text-danger">{{ $errors->first('email') }}</div>
             @endif
-            <input required class="form-control p-2" placeholder={{ trans('messages.Email Address') }} type="email" name="email" value="{{ old('email') }}">
+            <input required class="form-control p-2" placeholder="{{ trans('messages.EmailAddress') }}" type="email" name="email" value="{{ old('email') }}">
 
             <select class="form-select" name="roles">
                 <option class="text-muted" selected disabled>{{ trans('messages.Choose Role') }}</option>
@@ -47,11 +47,11 @@
             @if($errors->has('password'))
                 <div class="text-danger">{{ $errors->first('password') }}</div>
             @endif
-            <input required class="form-control p-2" placeholder={{ trans('messages.Password') }} type="password" name="password">
+            <input required class="form-control p-2" placeholder="{{ trans('messages.Password') }}" type="password" name="password">
             @if($errors->has('confirm-password'))
                 <div class="text-danger">{{ $errors->first('confirm-password') }}</div>
             @endif
-            <input required class="form-control p-2" placeholder={{trans('messages.Confirm Password')}} type="password" name="confirm-password" >
+            <input required class="form-control p-2" placeholder="{{trans('messages.Confirm Password')}}" type="password" name="confirm-password" >
 
             <button class="btn btn-lg btn-primary" type="submit">{{ trans('messages.Submit') }}</button>
             <a href="/login">{{ trans('messages.Already have an account? click here to log in') }}</a>

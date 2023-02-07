@@ -3,7 +3,7 @@
 
     <div class="position-absolute top-50 start-50 translate-middle allCenter flex-column rounded-circle border border-primary border-5" style="width:30vw; height:30vw">
         <h2>
-            {{ trans('messages.'.$header) }}
+            {{ trans('messages.'.$header) }} !
         </h2>
         <p>
             {{trans('messages.'.$body)}}

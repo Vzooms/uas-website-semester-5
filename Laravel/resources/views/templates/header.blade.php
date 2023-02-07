@@ -15,7 +15,7 @@
                 Amazing E-Grocery
             </h1>
         </a>
-        <div>
+        <div class="d-flex gap-3">
             @auth
                 {{-- login only --}}
                 <form action="/logout" method="post">
@@ -31,7 +31,7 @@
 
                 <a class="btn btn-info" href="/register">
                     <h6 class="m-0">
-                        {{ trans('Register') }}
+                        {{ trans('messages.Register') }}
                     </h6>
                 </a>
                 <a class="btn btn-info"  href="/login">
@@ -41,6 +41,15 @@
                 </a>
 
             @endauth
+            <form method="post" action="/languange">
+                @csrf
+                <input type="hidden" name="languange" value={{Config::get('app.locale') == 'en' ? 'id' : 'en'}}>
+                <button type="submit" class="btn btn-info">
+                    <h6 class="m-0">
+                        {{ Config::get('app.locale') == 'en' ? 'English' : 'Indonesia' }}
+                    </h6>
+                </button>
+            </form>
         </div>
     </div>
 

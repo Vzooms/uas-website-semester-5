@@ -4,13 +4,13 @@
     </td>
     <td class="d-flex gap-2">
         <a href={{'/account_maintenance/detail/'.$account->id}}>
-            <button class="btn btn-warning">Update Role</button>
+            <button class="btn btn-warning">{{trans('messages.Update Role')}}</button>
         </a>
         <form action="/deleteAccount" method="post">
             @csrf
             @method('delete')
             <input type="hidden" name="id" value={{$account->id}}>
-            <button class="btn btn-danger">Delete</button>
+            <button class="btn btn-danger">{{trans('messages.Delete')}}</button>
         </form>
     </td>
 </tr>

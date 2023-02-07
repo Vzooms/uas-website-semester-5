@@ -19,7 +19,7 @@
                 </div>
                 <input type="hidden" name="id" value={{$account->id}}>
                 <div class="d-flex justify-content-end">
-                    <button class="btn btn-primary btn-lg mt-5" type="submit">Save</button>
+                    <button class="btn btn-primary btn-lg mt-5" type="submit">{{trans('messages.Save')}}</button>
                 </div>
             </form>
         </div>

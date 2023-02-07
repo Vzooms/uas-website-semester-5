@@ -8,7 +8,7 @@
         @method('delete')
         <input type="hidden" name="order_id" value={{$order->id}}>
         <button type="submit" class="btn btn-danger">
-            {{trans('messages.delete')}}
+            {{trans('messages.Delete')}}
         </button>
     </form>
 

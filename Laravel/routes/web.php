@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\OrderController;
@@ -16,41 +17,42 @@ use App\Http\Controllers\AccountController;
 |
 */
 
-// App::setLocale('id');
-Route::get('/', [AccountController::class, 'toIndex'])->name('index');
 
-Route::middleware(['GuestOnly'])->group(function () {
-    Route::get('/login', [AccountController::class, 'toLogin']);
-    Route::post('/login', [AccountController::class, 'login']);
+    Route::get('/', [AccountController::class, 'toIndex'])->name('index');
+    Route::post('/languange', [AccountController::class, 'languange']);
 
-    Route::get('/register', [AccountController::class, 'toRegister']);
-    Route::post('/register', [AccountController::class, 'register']);
-});
+    Route::middleware(['GuestOnly'])->group(function () {
+        Route::get('/login', [AccountController::class, 'toLogin']);
+        Route::post('/login', [AccountController::class, 'login']);
 
-
-Route::middleware(['auth'])->group(function () {
-
-    Route::post('/logout', [AccountController::class, 'logout']);
-    Route::get('/home', [ItemController::class, 'toHome']);
-
-    Route::get('/detail/{id}', [ItemController::class, 'toDetail']);
-    Route::post('/createOrder', [OrderController::class, 'createOrder']);
-    Route::delete('/removeOrder', [OrderController::class, 'removeOrder']);
-    Route::delete('/checkOut', [OrderController::class, 'checkOut']);
-    Route::get('/cart', [OrderController::class, 'toOrder']);
-
-    Route::get('/profile', [AccountController::class, 'toProfile']);
-    Route::patch('/editProfile', [AccountController::class, 'editProfile']);
-
-    Route::middleware(['AdminOnly'])->group(function () {
-        Route::get('/account_maintenance', [AccountController::class, 'toAccount_maintenance']);
-        Route::get('/account_maintenance/detail/{id}', [AccountController::class, 'toAccountDetail']);
-        Route::patch('/editAccountMaintenance', [AccountController::class, 'editAccountMaintenance']);
-        Route::delete('/deleteAccount', [AccountController::class, 'deleteAccount']);
+        Route::get('/register', [AccountController::class, 'toRegister']);
+        Route::post('/register', [AccountController::class, 'register']);
     });
-});
 
-Route::get('/success', function () {
-    return view('success');
-});
+
+    Route::middleware(['auth'])->group(function () {
+
+        Route::post('/logout', [AccountController::class, 'logout']);
+        Route::get('/home', [ItemController::class, 'toHome']);
+
+        Route::get('/detail/{id}', [ItemController::class, 'toDetail']);
+        Route::post('/createOrder', [OrderController::class, 'createOrder']);
+        Route::delete('/removeOrder', [OrderController::class, 'removeOrder']);
+        Route::delete('/checkOut', [OrderController::class, 'checkOut']);
+        Route::get('/cart', [OrderController::class, 'toOrder']);
+
+        Route::get('/profile', [AccountController::class, 'toProfile']);
+        Route::patch('/editProfile', [AccountController::class, 'editProfile']);
+
+        Route::middleware(['AdminOnly'])->group(function () {
+            Route::get('/account_maintenance', [AccountController::class, 'toAccount_maintenance']);
+            Route::get('/account_maintenance/detail/{id}', [AccountController::class, 'toAccountDetail']);
+            Route::patch('/editAccountMaintenance', [AccountController::class, 'editAccountMaintenance']);
+            Route::delete('/deleteAccount', [AccountController::class, 'deleteAccount']);
+        });
+    });
+
+    Route::get('/success', function () {
+        return view('success');
+    });
 

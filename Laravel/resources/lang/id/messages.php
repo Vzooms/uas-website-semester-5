@@ -7,9 +7,9 @@ return [
     'Click here to login' => 'Tekan disini untuk masuk',
     'Register' => 'Daftar',
     'Login' => 'Masuk',
-    'First Name' => 'Nama Pertama',
-    'Last Name' => 'Nama Terakhir',
-    'Email Address' => 'Alamat Email',
+    'FirstName' => 'Nama Pertama',
+    'LastName' => 'Nama Terakhir',
+    'EmailAddress' => 'Alamat Email',
     'Choose Role' => 'Pilih Peran',
     'Male' => 'Laki - laki',
     'Female' => 'Perempuan',
@@ -33,7 +33,12 @@ return [
     'Click here to "Home"' => 'Tekan disini untuk ke "Home"',
     'Log Out Success' => 'Berhasil Keluar',
     'Wrong Email/Password. Please Check Again' => 'Salah Email atau Kata Kunci. Silahkan periksa kembali',
-    'Cart' => 'Keranjang'
+    'Cart' => 'Keranjang',
+    "Account" => 'Akun',
+    "Action" => 'Aksi',
+    "Update Role" => 'Ubah Peran',
+    "Role" => 'Peran',
+    "Saved" => 'Simpan',
 ];
 
 

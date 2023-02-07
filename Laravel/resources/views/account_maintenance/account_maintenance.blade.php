@@ -8,8 +8,8 @@
             <table class="table table-primary table-striped table-hover">
                 <thead>
                     <tr>
-                        <th>Account</th>
-                        <th>Action</th>
+                        <th>{{trans('messages.Account')}}</th>
+                        <th>{{trans('messages.Action')}}</th>
                     </tr>
                 </thead>
                 <tbody>

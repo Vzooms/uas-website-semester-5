@@ -4,12 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Models\Order;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
     public function toOrder(){
+        App::setlocale(session('locale'));
+
         $orders = Order::where('account_id', Auth::user()->id)->get();
         $sub_price = 0;
 
@@ -42,7 +45,7 @@ class OrderController extends Controller
         Order::where('account_id',Auth::user()->id)->delete();
 
         return view('/success',[
-            'header' => 'Success!',
+            'header' => 'Success',
             'body' => "We will contact you 1 x 24 hours",
             "footer" => "Click here to \"Home\"",
             "link" => "/home"
