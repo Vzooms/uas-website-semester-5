@@ -12,7 +12,7 @@
                 </div>
 
                 <div style="width: 80%">
-                    <h5>Price : Rp. {{$item->price}},-</h5>
+                    <h5>{{trans('messages.Price')}} : Rp. {{$item->price}},-</h5>
                     <p>
                         {{ $item->item_desc }}
                     </p>
@@ -24,7 +24,7 @@
                 <input type="hidden" name="item_id" value={{$item->id}}>
                 <input type="hidden" name="price" value={{$item->price}}>
                 <button type="submit" class="btn btn-warning">
-                    Buy
+                    {{trans('messages.Buy')}}
                 </button>
             </form>
         </div>

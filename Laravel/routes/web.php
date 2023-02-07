@@ -16,11 +16,11 @@ use App\Http\Controllers\AccountController;
 |
 */
 
-
-Route::get('/', [AccountController::class, 'toIndex']);
+// App::setLocale('id');
+Route::get('/', [AccountController::class, 'toIndex'])->name('index');
 
 Route::middleware(['GuestOnly'])->group(function () {
-    Route::get('/login', [AccountController::class, 'toLogin'])->name('login');
+    Route::get('/login', [AccountController::class, 'toLogin']);
     Route::post('/login', [AccountController::class, 'login']);
 
     Route::get('/register', [AccountController::class, 'toRegister']);

@@ -14,7 +14,9 @@ class AdminOnly
      */
     public function handle(Request $request, Closure $next)
     {
-        if(Auth::user()->role->role_name == 'Admin'){return $next($request);}
-        return back();
+        if(Auth::user()->role->role_name == 'Admin'){
+            return $next($request);
+        }
+        return redirect('/home');
     }
 }

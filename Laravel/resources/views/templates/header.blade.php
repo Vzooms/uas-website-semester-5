@@ -22,7 +22,7 @@
                     @csrf
                     <button type="submit" class="btn btn-info">
                         <h6 class="m-0">
-                            Log Out
+                            {{ trans('messages.Log Out') }}
                         </h6>
                     </button>
                 </form>
@@ -31,12 +31,12 @@
 
                 <a class="btn btn-info" href="/register">
                     <h6 class="m-0">
-                        Register
+                        {{ trans('Register') }}
                     </h6>
                 </a>
                 <a class="btn btn-info"  href="/login">
                     <h6 class="m-0">
-                        Login
+                        {{ trans('messages.Login') }}
                     </h6>
                 </a>
 
